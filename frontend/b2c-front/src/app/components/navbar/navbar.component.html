@@ -9,8 +9,10 @@
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="fas fa-search"></i></span>
           </div>
-          <input class="form-control" placeholder="Search" type="text" (focus)="focus = true"
-          (blur)="focus = false">
+          <input class="form-control" placeholder="Product Search" type="text" (focus)="focus = true"
+          (blur)="focus = false" (keyup.enter)="searchProduct(searchText.value)" #searchText>
+          <button (click)="searchProduct(searchText.value)"
+          class="btn btn-outline-primary my-2 my-sm-0" type="button">Search</button>
         </div>
       </div>
     </form>

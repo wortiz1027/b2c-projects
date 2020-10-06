@@ -33,4 +33,8 @@ export class NavbarComponent implements OnInit {
     return 'Dashboard';
   }
 
+  searchProduct( keyWord: string ) {
+    this.router.navigate( ['/buscar-productos', keyWord] );
+  }
+
 }
