@@ -8,9 +8,12 @@ import { TablesComponent } from '../../pages/tables/tables.component';
 import { ProductosComponent } from '../../pages/productos/productos.component';
 import { BuscarProductosComponent } from '../../pages/buscar-productos/buscar-productos.component';
 
+import { AuthenticationGuard } from '../../guard/authentication.guard';
+
+
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'dashboard',      component: DashboardComponent },
+    { path: 'dashboard',      component: DashboardComponent, canActivate: [AuthenticationGuard] },
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'tables',         component: TablesComponent },
     { path: 'icons',          component: IconsComponent },

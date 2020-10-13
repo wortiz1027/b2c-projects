@@ -1,10 +1,10 @@
-<div class="header bg-gradient-danger py-7 py-lg-8">
+<div class="header alert alert-danger alert-dismissible fade show py-7 py-lg-8">
   <div class="container">
     <div class="header-body text-center mb-7">
       <div class="row justify-content-center">
         <div class="col-lg-5 col-md-6">
-          <h1 class="text-white">Welcome!</h1>
-          <p class="text-lead text-light">Use these awesome forms to login or create new account in your project for free.</p>
+          <h1 class="text-white">Bienvenido!</h1>
+          <p class="text-lead text-light">Este es el registro en nuestra aplicación.</p>
         </div>
       </div>
     </div>
@@ -21,30 +21,75 @@
   <div class="row justify-content-center">
     <div class="col-lg-6 col-md-8">
       <div class="card bg-secondary shadow border-0">
-        <div class="card-header bg-transparent pb-5">
-          <div class="text-muted text-center mt-2 mb-4"><small>Sign up with</small></div>
-          <div class="text-center">
-            <a href="javascript:void(0)" class="btn btn-neutral btn-icon mr-4">
-              <span class="btn-inner--icon"><img src="assets/img/icons/common/github.svg"></span>
-              <span class="btn-inner--text">Github</span>
-            </a>
-            <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
-              <span class="btn-inner--icon"><img src="assets/img/icons/common/google.svg"></span>
-              <span class="btn-inner--text">Google</span>
-            </a>
-          </div>
-        </div>
         <div class="card-body px-lg-5 py-lg-5">
           <div class="text-center text-muted mb-4">
-            <small>Or sign up with credentials</small>
+            <small>Ingresa tu información</small>
           </div>
-          <form role="form">
+          <form role="form" [formGroup]="registerUsersForm" (submit)="createUser()">
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                  <span class="input-group-text"><i class="ni ni-badge"></i></span>
                 </div>
-                <input class="form-control" placeholder="Name" type="text">
+                <input class="form-control" placeholder="Cédula" type="number" formControlName="identificationNumber">
+              </div>
+              <div *ngIf="verificarCampo('identificationNumber')" class="alert alert-danger alert-dismissible fade show">
+                {{ getMensajeError("identificationNumber" )}}
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+                </div>
+                <input class="form-control" placeholder="Nombres" type="text" formControlName="firstName">
+              </div>
+              <div *ngIf="verificarCampo('firstName')" class="alert alert-danger alert-dismissible fade show">
+                {{ getMensajeError("firstName") }}
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+                </div>
+                <input class="form-control" placeholder="Apellidos" type="text" formControlName="lastName">
+              </div>
+              <div *ngIf="verificarCampo('lastName')" class="alert alert-danger alert-dismissible fade show">
+                {{ getMensajeError("lastName") }}
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-square-pin"></i></span>
+                </div>
+                <input class="form-control" placeholder="Dirección" type="text" formControlName="address">
+              </div>
+              <div *ngIf="verificarCampo('address')" class="alert alert-danger alert-dismissible fade show">
+                {{ getMensajeError("address") }}
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                </div>
+                <input class="form-control" placeholder="Fecha de Nacimiento" type="date" formControlName="birthdate">
+              </div>
+              <div *ngIf="verificarCampo('birthdate')" class="alert alert-danger alert-dismissible fade show">
+                {{ getMensajeError("birthdate") }}
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
+                </div>
+                <input class="form-control" placeholder="Telefono" type="text" formControlName="phone">
+              </div>
+              <div *ngIf="verificarCampo('phone')" class="alert alert-danger alert-dismissible fade show">
+                {{ getMensajeError("phone") }}
               </div>
             </div>
             <div class="form-group">
@@ -52,7 +97,21 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                 </div>
-                <input class="form-control" placeholder="Email" type="email">
+                <input class="form-control" placeholder="Email" type="email" formControlName="email">
+              </div>
+              <div *ngIf="verificarCampo('email')" class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ getMensajeError("email") }}
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+                </div>
+                <input class="form-control" placeholder="Nombre de Usuario" type="text" formControlName="username">
+              </div>
+              <div *ngIf="verificarCampo('username')" class="alert alert-danger alert-dismissible fade show">
+                {{ getMensajeError("username") }}
               </div>
             </div>
             <div class="form-group">
@@ -60,22 +119,15 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                 </div>
-                <input class="form-control" placeholder="Password" type="password">
+                <input class="form-control" placeholder="Password" type="password" formControlName="password">
               </div>
-            </div>
-            <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>
-            <div class="row my-4">
-              <div class="col-12">
-                <div class="custom-control custom-control-alternative custom-checkbox">
-                  <input class="custom-control-input" id="customCheckRegister" type="checkbox">
-                  <label class="custom-control-label" for="customCheckRegister">
-                    <span class="text-muted">I agree with the <a href="#!">Privacy Policy</a></span>
-                  </label>
-                </div>
+              <div *ngIf="verificarCampo('password')" class="alert alert-danger alert-dismissible fade show">
+                {{ getMensajeError("password") }}
               </div>
             </div>
             <div class="text-center">
-              <button type="button" class="btn btn-primary mt-4">Create account</button>
+              <button type="submit" class="btn btn-primary mt-4" [disabled]="registerUsersForm.invalid">Crear
+                Usuario</button>
             </div>
           </form>
         </div>

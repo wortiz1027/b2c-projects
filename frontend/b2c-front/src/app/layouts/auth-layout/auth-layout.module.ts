@@ -7,16 +7,25 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { LoginComponent } from '../../pages/login/login.component';
 import { RegisterComponent } from '../../pages/register/register.component';
+
+import { UserService } from '../../services/user.service';
+import { LoginService } from '../../services/login.service';
+
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AuthLayoutRoutes),
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
     // NgbModule
   ],
   declarations: [
     LoginComponent,
     RegisterComponent
+  ],
+  providers: [
+    UserService,
+    LoginService
   ]
 })
 export class AuthLayoutModule { }

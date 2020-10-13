@@ -8,8 +8,10 @@ import { ClipboardModule } from 'ngx-clipboard';
 
 // Services
 import { ProductosService } from '../../services/productos.service';
+import { UserService } from '../../services/user.service';
+import { LoginService } from '../../services/login.service';
 
-
+// Components
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { IconsComponent } from '../../pages/icons/icons.component';
@@ -42,7 +44,9 @@ import { BuscarProductosComponent } from '../../pages/buscar-productos/buscar-pr
     BuscarProductosComponent
   ],
   providers: [
-    ProductosService
+    ProductosService,
+    UserService,
+    LoginService
   ]
 })
 
