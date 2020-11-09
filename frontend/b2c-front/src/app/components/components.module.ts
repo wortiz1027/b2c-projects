@@ -5,7 +5,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ProductoTarjetaComponent } from './producto-tarjeta/producto-tarjeta.component';
 
 @NgModule({
   imports: [
@@ -16,8 +15,7 @@ import { ProductoTarjetaComponent } from './producto-tarjeta/producto-tarjeta.co
   declarations: [
     FooterComponent,
     NavbarComponent,
-    SidebarComponent,
-    ProductoTarjetaComponent
+    SidebarComponent
   ],
   exports: [
     FooterComponent,
