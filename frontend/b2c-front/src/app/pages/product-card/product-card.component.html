@@ -1,0 +1,19 @@
+<div class="col-xl-3 col-lg-6">
+    <div class="card card-stats mb-4 mb-xl-0" style="width: 21rem;">
+        <img class="card-img-center" src="https://d500.epimg.net/cincodias/imagenes/2018/11/13/lifestyle/1542113135_776401_1542116070_noticia_normal.jpg" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{ product.productName }}</h5>
+            <p class="card-text">{{ product.productDescription }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{ product.productPrice | currency }}</li>
+            <li class="list-group-item">{{ product.type.description }}</li>
+        </ul>
+        <div class="card-body">
+            <button (click)="getDetails()" class="btn btn-outline-info my-4">Ver Detalle</button>
+            <button (click)="addToCart()" class="btn btn-outline-success my-4">Agregar al carrito</button>
+            <!--a (click)="getDetails()" class="btn btn-primary">Ver Detalle</!--a-->
+        </div>
+    </div>
+</div>
+<br>

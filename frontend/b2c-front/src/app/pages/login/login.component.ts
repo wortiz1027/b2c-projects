@@ -46,13 +46,13 @@ export class LoginComponent implements OnInit, OnDestroy {
         console.log('resService: ', this.responseService);
         this.responseService.username = this.userToLogin.username;
         this._loginService.setToken(this.responseService);
+        this._loginService.setUserInformation(this.userToLogin.username);
         this.router.navigate(['/dashboard']);
       },
-      (res) => {
-        console.log('error ' + JSON.stringify(res.status));
+      (error) => {
+        console.log('Error {}', error);
       }
     );
-    console.log('token', this._loginService.getToken());
   }
 
   getMensajeError(field: string): string {

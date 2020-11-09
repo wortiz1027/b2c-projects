@@ -1,0 +1,43 @@
+<div class="header bg-gradient-danger py-1 py-lg-1">
+    <div class="container">
+        <div class="header-body text-center mb-7">
+            <div class="row justify-content-center">
+            </div>
+        </div>
+    </div>
+
+    <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+            xmlns="http://www.w3.org/2000/svg">
+            <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+    </div>
+</div>
+<br>
+<br>
+<div class="container-fluid mt--7">
+    <br>
+    <br>
+    <div class="card-header bg-transparent">
+        <h3 class="mb-0">Detalle del Producto <strong>{{ product.productCode }}</strong></h3>
+    </div>
+    <div class="row animated fadeIn fast">
+        <div class="card" style="width: 50rem;">
+            <img class="img-center" src="https://d500.epimg.net/cincodias/imagenes/2018/11/13/lifestyle/1542113135_776401_1542116070_noticia_normal.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h1>{{ product.productDescription }}</h1>
+                <p>{{ product.type.description }}</p>
+                <strong>Precio</strong>
+                <h1>{{ product.productPrice | currency }}</h1>
+                <p>Ciudad de Origen</p>
+                <h1>{{ product.originCity }}</h1>
+                <p>Ciudad Destino</p>
+                <h1>{{ product.destinationCity }}</h1>
+                <a [routerLink]="['/products-list']" class="btn btn-outline-warning my-4" >Regresar</a>
+                <button (click)="addToCart()" class="btn btn-outline-success my-4">Agregar al carrito</button>
+                <br>
+            </div>
+                
+        </div>
+    </div>
+</div>

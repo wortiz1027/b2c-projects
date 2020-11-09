@@ -30,7 +30,7 @@
                 <input class="form-control" placeholder="Nombre de Usuario" type="text" formControlName="username">
               </div>
               <div *ngIf="verificarCampo('username')" class="alert alert-danger alert-dismissible fade show">
-                {{ getMensajeError("Nombre de Usuario" )}}
+                {{ getMensajeError("username" )}}
               </div>
             </div>
             <div class="form-group">
@@ -41,7 +41,7 @@
                 <input class="form-control" placeholder="Password" type="password" formControlName="password">
               </div>
               <div *ngIf="verificarCampo('password')" class="alert alert-danger alert-dismissible fade show">
-                {{ getMensajeError("Contraseña" )}}
+                {{ getMensajeError("password" )}}
               </div>
             </div>
             <div class="text-center">

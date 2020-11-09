@@ -21,6 +21,7 @@ import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductosComponent } from '../../pages/productos/productos.component';
 import { BuscarProductosComponent } from '../../pages/buscar-productos/buscar-productos.component';
+// import { ProductsListComponent } from '../../pages/products-list/products-list.component';
 
 
 // import { ToastrModule } from 'ngx-toastr';
@@ -42,6 +43,7 @@ import { BuscarProductosComponent } from '../../pages/buscar-productos/buscar-pr
     MapsComponent,
     ProductosComponent,
     BuscarProductosComponent
+    // ProductsListComponent
   ],
   providers: [
     ProductosService,

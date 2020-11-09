@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { UUID } from 'angular2-uuid';
-
 
 @Injectable()
 export class UserService {
@@ -19,28 +17,48 @@ export class UserService {
 
     createUser(_body: User): Observable<any> {
         console.log('Consume UserService: ', _body);
-        _body.codigo = UUID.UUID();
+        _body.codigo = _body.cedula;
         _body.accountNonExpired = 'true';
         _body.credentialNonExpired = 'true';
         _body.accountNonLocket = 'true';
         _body.enable = 'true';
         _body.roles = [
-            { ROLE_CLIENT: '618bdc1e-05b2-11eb-acd0-67a7ef0f42bc' }
+            {
+                idRole: 3,
+                role: 'ROLE_CLIENT'
+            },
+            {
+                idRole: 5,
+                role: 'ROLE_PRODUCTOS_CONSULTA'
+            },
+            {
+                idRole: 7,
+                role: 'ROLE_CAMPANAS'
+            },
+            {
+                idRole: 8,
+                role: 'ROLE_ORDENES_CONSULTA'
+            },
+            {
+                idRole: 10,
+                role: 'ROLE_CLIENTES_CONSULTA'
+            }
         ];
+        _body.types = {
+            type: 2,
+            code: 'DRD',
+            description: 'Dorado'
+        };
         console.log('Consume UserService2: ', _body);
-        const result = this.httpClient
-            .post<any>(`http://localhost:9092/security/users`, JSON.stringify(_body), this.httpOptions);
 
-        console.log(JSON.stringify(result));
-        console.log(result);
-
-        return result;
+        return this.httpClient
+            .post<any>(`http://localhost:9092/registry/users`, JSON.stringify(_body), this.httpOptions);
     }
 
 }
 
 export interface User {
-    codigo: string;
+    codigo: number;
     cedula: number;
     nombres: string;
     apellidos: string;
@@ -55,10 +73,28 @@ export interface User {
     credentialNonExpired: string;
     accountNonLocket: string;
     roles: Array<RolesUser>;
+    types: TypeRole;
 }
 
 export interface RolesUser {
-    ROLE_CLIENT: string;
+    idRole: number;
+    role: string;
+}
+
+export interface TypeRole {
+    type: number;
+    code: string;
+    description: string;
+}
+
+export interface Status {
+    code: string;
+    description: string;
+}
+
+export interface ResponseServiceCreate {
+    status: Status;
+    user: User;
 }
 
 

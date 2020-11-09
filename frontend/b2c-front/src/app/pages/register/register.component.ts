@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { UserService } from '../../services/user.service';
+import { UserService, ResponseServiceCreate } from '../../services/user.service';
+import { LoginService, UserToLoging } from '../../services/login.service';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-register',
@@ -10,9 +14,14 @@ import { UserService } from '../../services/user.service';
 export class RegisterComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
-              private _userService: UserService) { }
+    private _userService: UserService,
+    private _loginService: LoginService,
+    private router: Router) { }
 
   userToCreate: any = {};
+  response: ResponseServiceCreate;
+  responseLogin: any;
+  userToLogin: UserToLoging;
   private emailValido = '^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$';
 
   registerUsersForm = this.formBuilder.group({
@@ -46,9 +55,39 @@ export class RegisterComponent implements OnInit {
     this.userToCreate.username = this.registerUsersForm.get('username').value;
     this.userToCreate.password = this.registerUsersForm.get('password').value;
 
-    this._userService.createUser(this.userToCreate).subscribe();
-
+    this._userService.createUser(this.userToCreate).subscribe(
+      (res) => {
+        console.log('Ingresó ', res);
+        this.response = res;
+        this.loginUser();
+      },
+      (error) => {
+        console.log('error ' + JSON.stringify(error));
+      }
+    );
     // console.log(this.registerUsersForm.value);
+  }
+
+  loginUser() {
+    if (this.response.status.code === 'SUCCESS') {
+      this.userToLogin = {};
+      this.userToLogin.username = this.response.user.username;
+      this.userToLogin.password = this.response.user.password;
+      this._loginService.userLogin(this.userToLogin).subscribe(
+        (res) => {
+          this.responseLogin = res;
+          console.log('resService: ', this.responseLogin);
+          this.responseLogin.username = this.userToLogin.username;
+          this._loginService.setToken(this.responseLogin);
+          this.router.navigate(['/dashboard']);
+        },
+        (error) => {
+          console.log('Error {}', error);
+        }
+      );
+    } else {
+      console.log('Error');
+    }
   }
 
   getMensajeError(field: string): string {

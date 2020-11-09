@@ -3,6 +3,8 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
+
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +15,8 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  constructor(location: Location, private element: ElementRef, private router: Router, private _loginService: LoginService) {
+  constructor(location: Location, private element: ElementRef, private router: Router,
+              private _loginService: LoginService, private _shoppingCartService: ShoppingCartService) {
     this.location = location;
   }
 
@@ -21,12 +24,12 @@ export class NavbarComponent implements OnInit {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
   }
   getTitle() {
-    var titlee = this.location.prepareExternalUrl(this.location.path());
+    let titlee = this.location.prepareExternalUrl(this.location.path());
     if (titlee.charAt(0) === '#') {
       titlee = titlee.slice(1);
     }
 
-    for (var item = 0; item < this.listTitles.length; item++) {
+    for (let item = 0; item < this.listTitles.length; item++) {
       if (this.listTitles[item].path === titlee) {
         return this.listTitles[item].title;
       }
@@ -44,6 +47,10 @@ export class NavbarComponent implements OnInit {
 
   getUserName(): string {
     return this._loginService.getUserName();
+  }
+
+  getTotalProducts(): number {
+    return this._shoppingCartService.getTotalProducts();
   }
 
 }

@@ -1,0 +1,28 @@
+<div class="header bg-gradient-danger py-1 py-lg-1">
+    <div class="container">
+        <div class="header-body text-center mb-7">
+            <div class="row justify-content-center">
+            </div>
+        </div>
+    </div>
+
+    <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+            xmlns="http://www.w3.org/2000/svg">
+            <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+    </div>
+</div>
+<br>
+<br>
+<div class="container-fluid mt--7">
+    <br>
+    <br>
+    <div class="card-header bg-transparent">
+        <h3 class="mb-0">Lista de Productos en el carrito de compras</h3>
+    </div>
+    <div class="row animated fadeIn fast">
+        <app-product-card-cart [product]="product" *ngFor="let product of productsToShow"></app-product-card-cart>
+    </div>
+
+</div>

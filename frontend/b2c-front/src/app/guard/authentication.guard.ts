@@ -13,7 +13,6 @@ export class AuthenticationGuard implements CanActivate {
               private router: Router) {
   }
   canActivate(): boolean {
-    console.log('token: ', this._loginService.getToken());
     if (this._loginService.getToken() === '' || this._loginService.getToken() === undefined) {
       this.router.navigateByUrl('/login');
       return false;

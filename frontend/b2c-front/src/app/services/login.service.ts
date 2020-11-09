@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { ShoppingCartService } from './shopping-cart.service';
 
 
 
@@ -20,14 +21,16 @@ export class LoginService {
 
     constructor(private httpClient: HttpClient,
         private cookies: CookieService,
-        private router: Router) {
+        private router: Router,
+        private _shoppingCartService: ShoppingCartService) {
         console.log('Users service ready!!');
     }
 
     userLogin(_body: UserToLoging): Observable<any> {
+        this._shoppingCartService.clearCart();
         console.log('Ingreso al login');
-        this.formData.append('client_id', '5258f2f8-05b3-11eb-96f5-9f4a2df3ac0e');
-        this.formData.append('client_secret', '9430fd38-05b3-11eb-a999-c7e4bb44a691');
+        this.formData.append('client_id', '89792737-705f-4358-a95b-744962644de4');
+        this.formData.append('client_secret', '0b78c28e-6abc-4252-85d1-214da95bc6ca');
         this.formData.append('scope', 'read write');
         this.formData.append('grant_type', 'password');
         this.formData.append('username', _body.username);
@@ -38,32 +41,61 @@ export class LoginService {
 
     setToken(userInformation: ResponseService) {
         this.cookies.set('token', userInformation.access_token);
-        this.cookies.set('username', userInformation.username);
+        this.cookies.set('refreshToken', userInformation.refresh_token);
+    }
+
+    setUserInformation(username: string) {
+        this.cookies.set('username', username);
     }
 
     getToken() {
         return this.cookies.get('token');
     }
 
+    getRefreshToken() {
+        return this.cookies.get('refreshToken');
+    }
+
     getUserName() {
-        return this.cookies.get('username');
+        let username = '';
+        username = this.cookies.get('username');
+        console.log('username: ', username);
+        return username;
     }
 
     userLogout() {
-        this.cookies.set('token', '');
-        this.cookies.set('username', '');
+        this._shoppingCartService.clearCart();
+        this.cookies.deleteAll();
         this.router.navigateByUrl('/login');
+    }
+
+    refreshToken() {
+        console.log('Ingreso al login');
+        this.formData.append('client_id', '89792737-705f-4358-a95b-744962644de4');
+        this.formData.append('client_secret', '0b78c28e-6abc-4252-85d1-214da95bc6ca');
+        this.formData.append('grant_type', 'refresh_token');
+        this.formData.append('refresh_token', this.getRefreshToken());
+        this.httpClient
+            .post<any>(`http://localhost:9092/uua/oauth/token`, this.formData).subscribe(
+                (resRefresh) => {
+                    this.responseService = resRefresh;
+                    this.setToken(this.responseService);
+                  },
+                  (error) => {
+                    console.log('Error {}', error);
+                  }
+            );
     }
 
 }
 
 export interface UserToLoging {
-    grant_type: string;
-    client_id: string;
-    client_secret: string;
-    username: string;
-    password: string;
-    scope: string;
+    grant_type?: string;
+    client_id?: string;
+    client_secret?: string;
+    username?: string;
+    password?: string;
+    scope?: string;
 }
 
 export interface ResponseService {
