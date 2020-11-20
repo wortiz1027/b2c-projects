@@ -1,0 +1,18 @@
+.carousel-control-prev-icon {
+  background-image: url('https://apufpel.com.br/assets/img/seta_prim.png')
+}
+
+.carousel-control-next-icon {
+  background-image: url('https://apufpel.com.br/assets/img/seta_ult.png')
+}
+
+.carousel-inner img {
+  margin: auto;
+  width: 50%;
+}
+
+img {
+    margin: auto;
+    height: 400px;
+    width: 100%;
+}

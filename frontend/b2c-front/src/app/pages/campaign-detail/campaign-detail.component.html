@@ -15,38 +15,19 @@
 </div>
 <br>
 <br>
-
-    <ngb-carousel *ngIf="campaigns" (slide)="onSlide($event)">
-        <ng-template *ngFor="let campaign of campaigns; let i = index" ngbSlide [id]="'slideId_' + i">
-            <img src="https://d500.epimg.net/cincodias/imagenes/2018/11/13/lifestyle/1542113135_776401_1542116070_noticia_normal.jpg"
-                [alt]="campaign.campaignName" (click)="getCampaignDetail(campaign)">
-        </ng-template>
-    </ngb-carousel>
-
-<br>
-<br>
 <div class="container-fluid mt--7">
     <br>
     <br>
     <div class="card-header bg-transparent">
-        <h3 class="mb-0">Lista de Productos</h3>
-    </div>
-    <div class="input-group">
-        <div class="input-group-prepend">
-            <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-        </div>
-        <input class="form-control" placeholder="Búsqueda" type="text" #textSearch>
-        <div class="input-group-append">
-            <button type="button" class="btn btn-outline-info" (click)="getProductsWithPage(textSearch.value, true)">Buscar</button>
-        </div>
+        <h3 class="mb-0">Lista de Productos de la Campaña</h3>
     </div>
     <br/>
     <div class="row animated fadeIn fast">
-        <app-product-card [product]="product" *ngFor="let product of productosResult | paginate : {
+        <app-product-cart-campaign [product]="product" [discount]="discount" *ngFor="let product of productosResult | paginate : {
             itemsPerPage: totalItemsToShow,
             currentPage: currentPage + 1,
             totalItems: totalItems
-        };"></app-product-card>
+        };"></app-product-cart-campaign>
     </div>
     <div class="d-flex justify-content-center">
         <pagination-controls responsive="true" previousLabel="Prev" nextLabel="Next"

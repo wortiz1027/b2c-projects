@@ -18,9 +18,27 @@
 <div class="container-fluid mt--7">
     <br>
     <br>
-    <div class="card-header bg-transparent">
-        <h3 class="mb-0">Lista de Productos en el carrito de compras</h3>
+    <br>
+    <div class="bg-transparent">
+        <h3 class="mb-0">Detalle de su Compra</h3>
     </div>
+    <br>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text border-left-1" >Tiene {{ products.length }} productos en su carrito de compras por un valor de: {{ getTotalPrice() }}</span>
+        </div>
+        <div class="input-group-append">
+            <button type="button" class="btn btn-success" (click)="createOrder()">Realizar Compra</button>
+        </div>
+    </div>
+
+
+    <br>
+    <div class="bg-transparent">
+        <h3 class="mb-0">Productos en el Carrito de Compras</h3>
+    </div>
+    <br>
     <div class="row animated fadeIn fast">
         <app-product-card-cart [product]="product" *ngFor="let product of productsToShow"></app-product-card-cart>
     </div>

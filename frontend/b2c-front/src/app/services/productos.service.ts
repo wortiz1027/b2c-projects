@@ -7,6 +7,7 @@ import { LoginService } from './login.service';
 export class ProductosService {
 
     private productos: Producto[];
+    private formData = new FormData();
 
     constructor(private httpClient: HttpClient,
         private _loginService: LoginService) {
@@ -58,21 +59,43 @@ export class ProductosService {
         return this.httpClient
             .get(`http://localhost:9092/products/qrs/details`, this.httpOptionsWithParams);
     }
+
+    getProductosByText(textSearch: string, pageNumber: number, productsPerPage: number): Observable<any> {
+        console.log('Ingreso a traer productos por Texto: ', textSearch);
+        let params = new HttpParams();
+        params = params.append('page', pageNumber.toString());
+        params = params.append('size', productsPerPage.toString());
+        this.httpOptionsWithParams.params = params;
+        this.formData.delete('text');
+        this.formData.append('text', '*' + textSearch + '*');
+        return this.httpClient
+            .post(`http://localhost:9092/products/qrs/text`, this.formData, this.httpOptionsWithParams);
+    }
+
+    getProductsByCampaign(campaignId: string, pageNumber: number, productsPerPage: number): Observable<any> {
+        console.log('Ingreso a traer el productos por campaña');
+        let params = new HttpParams();
+        params = params.append('page', pageNumber.toString());
+        params = params.append('size', productsPerPage.toString());
+        this.httpOptionsWithParams.params = params;
+        return this.httpClient
+            .get(`http://localhost:9092/campaigns/qrs/` + campaignId + `/products`, this.httpOptionsWithParams);
+    }
 }
 
 export interface Producto {
-    productId: string;
-    productCode: string;
-    productName: string;
-    productDescription: string;
-    startDate: Date;
-    endDate: Date;
-    type: ProductType;
-    productPrice: number;
-    originCity: string;
-    destinationCity: string;
-    image: Image;
-    vendorId: string;
+    productId?: string;
+    productCode?: string;
+    productName?: string;
+    productDescription?: string;
+    startDate?: Date;
+    endDate?: Date;
+    type?: ProductType;
+    productPrice?: number;
+    originCity?: string;
+    destinationCity?: string;
+    image?: Image;
+    vendorId?: string;
     status?: string;
 }
 

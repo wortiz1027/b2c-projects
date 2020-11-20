@@ -7,12 +7,13 @@ import { ProductDetailsComponent } from '../../pages/product-details/product-det
 import { ShoppingCartDetailsComponent } from '../../pages/shopping-cart-details/shopping-cart-details.component';
 
 import { AuthenticationGuard } from '../../guard/authentication.guard';
-
+import { CampaignDetailComponent } from '../../pages/campaign-detail/campaign-detail.component';
 
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent, canActivate: [AuthenticationGuard] },
     { path: 'products-list',      component: ProductsListComponent },
     { path: 'product-details/:productId',      component: ProductDetailsComponent },
-    { path: 'shopping-cart-details',      component: ShoppingCartDetailsComponent }
+    { path: 'shopping-cart-details',      component: ShoppingCartDetailsComponent },
+    { path: 'campaign-detail/:campaignId/:discount',      component: CampaignDetailComponent }
 ];

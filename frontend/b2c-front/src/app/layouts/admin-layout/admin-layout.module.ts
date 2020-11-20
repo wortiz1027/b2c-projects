@@ -10,13 +10,14 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { ProductosService } from '../../services/productos.service';
 import { UserService } from '../../services/user.service';
 import { LoginService } from '../../services/login.service';
+import { CampaignsService } from '../../services/campaigns.service';
+
 
 // Components
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductosComponent } from '../../pages/productos/productos.component';
-import { BuscarProductosComponent } from '../../pages/buscar-productos/buscar-productos.component';
 
 @NgModule({
   imports: [
@@ -29,13 +30,13 @@ import { BuscarProductosComponent } from '../../pages/buscar-productos/buscar-pr
   ],
   declarations: [
     DashboardComponent,
-    ProductosComponent,
-    BuscarProductosComponent
+    ProductosComponent
   ],
   providers: [
     ProductosService,
     UserService,
-    LoginService
+    LoginService,
+    CampaignsService
   ]
 })
 

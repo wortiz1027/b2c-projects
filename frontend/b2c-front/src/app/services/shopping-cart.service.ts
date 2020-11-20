@@ -18,7 +18,8 @@ export class ShoppingCartService {
       productId: product.productId,
       productCode: product.productCode,
       productName: product.productName,
-      productDescription: product.productDescription
+      productDescription: product.productDescription,
+      productPrice: product.productPrice
     };
     if (localStorage.getItem('shoppingCart') === '' || localStorage.getItem('shoppingCart') === null) {
       this.shoppingCart = [];
@@ -39,12 +40,10 @@ export class ShoppingCartService {
   getTotalProducts(): number {
     let cant = 0;
     if (localStorage.getItem('shoppingCart') === '' || localStorage.getItem('shoppingCart') === null) {
-      console.log('cant1: ', cant);
       return cant;
     }
     this.shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
     cant = this.shoppingCart.length;
-    console.log('cant2: ', cant);
     return cant;
   }
 
@@ -76,4 +75,5 @@ export interface ProductCart {
   productCode: string;
   productName: string;
   productDescription: string;
+  productPrice: number;
 }

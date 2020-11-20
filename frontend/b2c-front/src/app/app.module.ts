@@ -23,6 +23,9 @@ import { ShoppingCartDetailsComponent } from './pages/shopping-cart-details/shop
 import { ProductCardCartComponent } from './pages/product-card-cart/product-card-cart.component';
 import { JwPaginationModule } from 'jw-angular-pagination';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CampaignDetailComponent } from './pages/campaign-detail/campaign-detail.component';
+import { ProductCartCampaignComponent } from './pages/product-cart-campaign/product-cart-campaign.component';
+import { OrdersService } from './services/orders.service';
 
 @NgModule({
   imports: [
@@ -46,12 +49,15 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ProductDetailsComponent,
     ProductsListComponent,
     ShoppingCartDetailsComponent,
-    ProductCardCartComponent
+    ProductCardCartComponent,
+    CampaignDetailComponent,
+    ProductCartCampaignComponent
   ],
   providers: [
     AutguardService,
     LoginService,
-    ShoppingCartService
+    ShoppingCartService,
+    OrdersService
   ],
   bootstrap: [AppComponent]
 })
