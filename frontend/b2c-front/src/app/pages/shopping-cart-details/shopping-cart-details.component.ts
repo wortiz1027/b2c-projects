@@ -35,6 +35,7 @@ export class ShoppingCartDetailsComponent implements OnInit {
             let productDetail: Producto;
             productDetail = res.product;
             productDetail.productPrice = product.productPrice;
+            productDetail.quantity = product.productQuantity;
             this.productsToShow.push(productDetail);
             this._loginService.refreshToken();
           },

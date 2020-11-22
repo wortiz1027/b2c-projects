@@ -14,20 +14,33 @@ export class ShoppingCartService {
 
   addItemToCart(product: Producto) {
     console.log('Ingresó a agregar producto');
-    const productToAdd: ProductCart = {
-      productId: product.productId,
-      productCode: product.productCode,
-      productName: product.productName,
-      productDescription: product.productDescription,
-      productPrice: product.productPrice
-    };
+    let itemExists = false;
     if (localStorage.getItem('shoppingCart') === '' || localStorage.getItem('shoppingCart') === null) {
       this.shoppingCart = [];
     } else {
       console.log('carrito de compras: ', JSON.parse(localStorage.getItem('shoppingCart')));
       this.shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
     }
-    this.shoppingCart.push(productToAdd);
+    console.log('var: ', itemExists);
+    for (let i = 0; i < this.shoppingCart.length; i++) {
+      if (this.shoppingCart[i].productCode === product.productCode) {
+        console.log(this.shoppingCart[i].productCode + '   ' + product.productCode);
+        itemExists = true;
+        this.shoppingCart[i].productQuantity += 1;
+        this.shoppingCart[i].productPrice = product.productPrice;
+      }
+    }
+    if (!itemExists) {
+      const productToAdd: ProductCart = {
+        productId: product.productId,
+        productCode: product.productCode,
+        productName: product.productName,
+        productDescription: product.productDescription,
+        productPrice: product.productPrice,
+        productQuantity: 1
+      };
+      this.shoppingCart.push(productToAdd);
+    }
     localStorage.setItem('shoppingCart', JSON.stringify(this.shoppingCart));
   }
 
@@ -43,7 +56,9 @@ export class ShoppingCartService {
       return cant;
     }
     this.shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
-    cant = this.shoppingCart.length;
+    for (let i = 0; i < this.shoppingCart.length; i++) {
+      cant += this.shoppingCart[i].productQuantity;
+    }
     return cant;
   }
 
@@ -51,7 +66,11 @@ export class ShoppingCartService {
     this.shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
     for (let i = 0; i < this.shoppingCart.length; i++) {
       if (this.shoppingCart[i].productCode = productToDelete.productCode) {
-        this.shoppingCart.splice(i, 1);
+        if (this.shoppingCart[i].productQuantity === 1) {
+          this.shoppingCart.splice(i, 1);
+        } else {
+          this.shoppingCart[i].productQuantity -= 1;
+        }
         localStorage.setItem('shoppingCart', JSON.stringify(this.shoppingCart));
         return;
       }
@@ -76,4 +95,5 @@ export interface ProductCart {
   productName: string;
   productDescription: string;
   productPrice: number;
+  productQuantity: number;
 }

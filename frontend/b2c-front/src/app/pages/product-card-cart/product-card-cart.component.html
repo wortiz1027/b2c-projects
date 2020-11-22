@@ -8,6 +8,7 @@
         <ul class="list-group list-group-flush">
             <li class="list-group-item">{{ product.productPrice | currency }}</li>
             <li class="list-group-item">{{ product.type.description }}</li>
+            <li class="list-group-item">{{ product.quantity }}</li>
         </ul>
         <div class="card-body">
             <button (click)="deleteToCart()" class="btn btn-outline-info my-4">Eliminar del Carrito</button>

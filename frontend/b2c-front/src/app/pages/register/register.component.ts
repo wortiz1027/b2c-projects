@@ -76,7 +76,6 @@ export class RegisterComponent implements OnInit {
       this._loginService.userLogin(this.userToLogin).subscribe(
         (res) => {
           this.responseLogin = res;
-          console.log('resService: ', this.responseLogin);
           this.responseLogin.username = this.userToLogin.username;
           this._loginService.setToken(this.responseLogin);
           this.router.navigate(['/dashboard']);

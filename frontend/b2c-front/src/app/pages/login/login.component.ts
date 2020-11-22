@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { LoginService, ResponseService } from '../../services/login.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   responseService: ResponseService;
   constructor(private _loginService: LoginService,
     private formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+    private _userService: UserService) { }
 
   loginUsersForm = this.formBuilder.group({
     username: ['', { validators: [Validators.required] }],
@@ -43,10 +45,17 @@ export class LoginComponent implements OnInit, OnDestroy {
     this._loginService.userLogin(this.userToLogin).subscribe(
       (res) => {
         this.responseService = res;
-        console.log('resService: ', this.responseService);
         this.responseService.username = this.userToLogin.username;
         this._loginService.setToken(this.responseService);
         this._loginService.setUserInformation(this.userToLogin.username);
+        this._userService.getUserDetailByUsername(this.userToLogin.username).subscribe(
+          (res2) => {
+            this._loginService.setUserDetails(res2.user.cedula);
+          },
+          (error) => {
+            console.error(error);
+          }
+        );
         this.router.navigate(['/dashboard']);
       },
       (error) => {

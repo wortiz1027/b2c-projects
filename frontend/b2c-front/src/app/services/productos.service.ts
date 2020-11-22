@@ -97,6 +97,7 @@ export interface Producto {
     image?: Image;
     vendorId?: string;
     status?: string;
+    quantity?: number;
 }
 
 export interface ProductType {

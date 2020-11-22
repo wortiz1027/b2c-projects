@@ -1,0 +1,85 @@
+<div class="header bg-gradient-danger py-1 py-lg-1">
+    <div class="container">
+        <div class="header-body text-center mb-7">
+            <div class="row justify-content-center">
+            </div>
+        </div>
+    </div>
+
+    <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+            xmlns="http://www.w3.org/2000/svg">
+            <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+    </div>
+</div>
+<br>
+<br>
+
+<ngb-carousel *ngIf="campaigns" (slide)="onSlide($event)">
+    <ng-template *ngFor="let campaign of campaigns; let i = index" ngbSlide [id]="'slideId_' + i">
+        <img src="https://d500.epimg.net/cincodias/imagenes/2018/11/13/lifestyle/1542113135_776401_1542116070_noticia_normal.jpg"
+            [alt]="campaign.campaignName" (click)="getCampaignDetail(campaign)">
+    </ng-template>
+</ngb-carousel>
+
+<br>
+<br>
+<div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <h3 class="mb-0">Órdenes</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Código</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Cantidad de Productos</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let order of ordersClient">
+                                <th scope="row">
+                                    <div class="media align-items-center">
+                                        <a href="#" class="avatar rounded-circle mr-3">
+                                            <img alt="Image placeholder" src="assets/img/theme/shopping_cart.png">
+                                        </a>
+                                        <div class="media-body">
+                                            <span class="mb-0 text-sm">{{ order.code }}</span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td>
+                                    {{ order.total | currency }}
+                                </td>
+                                <td>
+                                    {{ order.products.length }}
+                                </td>
+                                <td>
+                                    {{ order.state.value }}
+                                </td>
+                                <td class="text-right">
+                                    <div ngbDropdown placement="bottom-right">
+                                        <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </a>
+                                        <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                                            <a *ngIf="order.state.value != 'CANCELADA'" class="dropdown-item" (click)="cancelOrderById(order)">Cancelar</a>
+                                            <a class="dropdown-item" (click)="goToOrderDetails(order)">Ver Detalle</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

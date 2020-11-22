@@ -13,7 +13,7 @@ export class ProductsListComponent implements OnInit {
 
   public productosResult = [];
   public totalItems = 1;
-  public totalItemsToShow = 10;
+  public totalItemsToShow = 1;
   public totalPages = 0;
   public currentPage = 0;
   public textSearch = '';

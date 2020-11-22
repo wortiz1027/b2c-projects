@@ -26,6 +26,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CampaignDetailComponent } from './pages/campaign-detail/campaign-detail.component';
 import { ProductCartCampaignComponent } from './pages/product-cart-campaign/product-cart-campaign.component';
 import { OrdersService } from './services/orders.service';
+import { OrdersListComponent } from './pages/orders-list/orders-list.component';
+import { OrderDetailsComponent } from './pages/order-details/order-details.component';
 
 @NgModule({
   imports: [
@@ -51,7 +53,9 @@ import { OrdersService } from './services/orders.service';
     ShoppingCartDetailsComponent,
     ProductCardCartComponent,
     CampaignDetailComponent,
-    ProductCartCampaignComponent
+    ProductCartCampaignComponent,
+    OrdersListComponent,
+    OrderDetailsComponent
   ],
   providers: [
     AutguardService,

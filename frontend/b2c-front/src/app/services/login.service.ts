@@ -48,6 +48,15 @@ export class LoginService {
         this.cookies.set('username', username);
     }
 
+    setUserDetails(identification: string) {
+        this.cookies.set('identificationType', 'CC');
+        this.cookies.set('identification', identification);
+    }
+
+    getIdentificationUser() {
+        return this.cookies.get('identification');
+    }
+
     getToken() {
         return this.cookies.get('token');
     }
@@ -65,7 +74,7 @@ export class LoginService {
     userLogout() {
         this._shoppingCartService.clearCart();
         this.cookies.deleteAll();
-        this.router.navigateByUrl('/login');
+        this.router.navigate(['/login']);
     }
 
     refreshToken() {
