@@ -30,6 +30,9 @@ export class ProductDetailsComponent implements OnInit {
         },
         (error) => {
           console.log('Error: ', error);
+          if (error.status === 401) {
+            this._loginService.userLogout();
+          }
         }
       );
     });

@@ -4,8 +4,7 @@ import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { ShoppingCartService } from './shopping-cart.service';
-
-
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class LoginService {
@@ -36,7 +35,7 @@ export class LoginService {
         this.formData.append('username', _body.username);
         this.formData.append('password', _body.password);
         return this.httpClient
-            .post<any>(`http://localhost:9092/uua/oauth/token`, this.formData);
+            .post<any>(environment.LOGIN_SERVICE_URL, this.formData);
     }
 
     setToken(userInformation: ResponseService) {
@@ -84,13 +83,16 @@ export class LoginService {
         this.formData.append('grant_type', 'refresh_token');
         this.formData.append('refresh_token', this.getRefreshToken());
         this.httpClient
-            .post<any>(`http://localhost:9092/uua/oauth/token`, this.formData).subscribe(
+            .post<any>(environment.LOGIN_SERVICE_URL, this.formData).subscribe(
                 (resRefresh) => {
                     this.responseService = resRefresh;
                     this.setToken(this.responseService);
                 },
                 (error) => {
                     console.log('Error {}', error);
+                    if (error.status === 401) {
+                        this.userLogout();
+                      }
                 }
             );
     }

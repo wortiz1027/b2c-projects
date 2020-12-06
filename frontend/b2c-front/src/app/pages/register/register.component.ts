@@ -63,6 +63,9 @@ export class RegisterComponent implements OnInit {
       },
       (error) => {
         console.log('error ' + JSON.stringify(error));
+        if (error.status === 401) {
+          this._loginService.userLogout();
+        }
       }
     );
     // console.log(this.registerUsersForm.value);
@@ -78,10 +81,7 @@ export class RegisterComponent implements OnInit {
           this.responseLogin = res;
           this.responseLogin.username = this.userToLogin.username;
           this._loginService.setToken(this.responseLogin);
-          this.router.navigate(['/dashboard']);
-        },
-        (error) => {
-          console.log('Error {}', error);
+          this.router.navigate(['/products-list']);
         }
       );
     } else {

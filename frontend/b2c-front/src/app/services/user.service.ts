@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LoginService } from './login.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class UserService {
@@ -61,7 +62,7 @@ export class UserService {
         console.log('Consume UserService2: ', _body);
 
         return this.httpClient
-            .post<any>(`http://localhost:9092/registry/users`, JSON.stringify(_body), this.httpOptions);
+            .post<any>(environment.CREATE_USER_SERVICE, JSON.stringify(_body), this.httpOptions);
     }
 
     getUserDetailByUsername(username: string): Observable<any> {
@@ -70,7 +71,7 @@ export class UserService {
         params = params.append('username', username);
         this.httpOptionsWithParams.params = params;
         return this.httpClient
-            .get(`http://localhost:9092/security/users/detail`, this.httpOptionsWithParams);
+            .get(environment.GET_USER_DETAILS_SERVICE_URL, this.httpOptionsWithParams);
     }
 
 }
@@ -132,88 +133,3 @@ export interface ResponseServiceCreate {
     status: Status;
     user: User;
 }
-
-
-/* "codigo" : "971f5168-cd7e-40d3-84e1-817956856eaa",
-	"cedula" : 98745632,
-	"nombres" : "Carlos Andres",
-	"apellidos" : "Perez Ramos",
-	"direccion" : "Cra 107 # 124B - 2",
-	"fechaNacimiento" : "2001-01-01",
-	"telefono" : "9874562545",
-	"email" : "cperez@outlook.com",
-	"username" : "cperez",
-	"password" : "Octubre2020**",
-	"enable" : "true",
-	"accountNonExpired" : "true",
-	"credentialNonExpired" : "true",
-	"accountNonLocket" : "true",
-	"roles" : [
-		{
-			"ROLE_CLIENT" : "618bdc1e-05b2-11eb-acd0-67a7ef0f42bc"
-		}
-    ]
-*/
-
-/*
-private userTest: any = {
-        code: "971f5168-cd7e-40d3-84e1-817956856eaa",
-        identificationNumber: 10101010,
-        firstName: "Carlos Andres",
-        lastName: "Perez Ramos",
-        address: "Cra 107 # 124B - 2",
-        birthday: new Date(),
-        phoneNumber: "9874562545",
-        email: "bsuarez@outlook.com",
-        username: "bsuarez",
-        password: "Octubre2020**",
-        enable: "true",
-        accountNonExpired: "true",
-        credentialNonExpired: "true",
-        accountNonLocket: "true",
-        roles: [
-            {
-                ROLE_CLIENT: "618bdc1e-05b2-11eb-acd0-67a7ef0f42bc"
-            }
-        ]
-    };
-
-const body = new HttpParams()
-            .set('code', this.userTest.code)
-            .set('identificationNumber', this.userTest.identificationNumber.toString())
-            .set('firstName', this.userTest.firstName)
-            .set('lastName', this.userTest.lastName)
-            .set('address', this.userTest.address)
-            .set('birthday', this.userTest.birthday.toString())
-            .set('phoneNumber', this.userTest.phoneNumber)
-            .set('email', this.userTest.email)
-            .set('username', this.userTest.username)
-            .set('password', this.userTest.password)
-            .set('enable', this.userTest.enable)
-            .set('accountNonExpired', this.userTest.accountNonExpired)
-            .set('credentialNonExpired', this.userTest.credentialNonExpired)
-            .set('accountNonLocket', this.userTest.accountNonLocket)
-            .set('roles.ROLE_CLIENT', this.userTest.roles.ROLE_CLIENT);
-
-private userTest: User = {
-        codigo: '971f5168-cd7e-40d3-84r1-817966856eaa',
-        cedula: 9797979,
-        nombres: 'CXXXX',
-        apellidos: 'PDDDD',
-        direccion: 'Cra 107 # 124B - 2',
-        fechaNacimiento: new Date(),
-        telefono: '4554545454',
-        email: 'qqqqqqq@outlook.com',
-        username: 'qqqqqqq',
-        password: 'Octubre2020**',
-        enable: 'true',
-        accountNonExpired: 'true',
-        credentialNonExpired: 'true',
-        accountNonLocket: 'true',
-        roles: [
-            {
-                ROLE_CLIENT: "618bdc1e-05b2-11eb-acd0-67a7ef0f42bc"
-            }
-        ]
-    };
-*/

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { LoginService } from './login.service';
 import { UUID } from 'angular2-uuid';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class OrdersService {
@@ -35,7 +36,7 @@ export class OrdersService {
     order.payment = payment;
     console.log('Rq Orders: ', JSON.stringify(order));
     return this.httpClient
-      .post<any>(`http://localhost:9092/orders/cmd`, JSON.stringify(order), this.httpOptions);
+      .post<any>(environment.COMMAND_ORDERS_SERVICE_URL, JSON.stringify(order), this.httpOptions);
   }
 
   getOrdersByUserName(username: string, pageNumber: number, ordersPerPage: number): Observable<any> {
@@ -45,19 +46,19 @@ export class OrdersService {
     params = params.append('size', ordersPerPage.toString());
     this.httpOptionsWithParams.params = params;
     return this.httpClient
-      .get(`http://localhost:9092/orders/qrs/all/client/` + username, this.httpOptionsWithParams);
+      .get(environment.GET_ORDERS_BY_USER_URL + username, this.httpOptionsWithParams);
   }
 
   cancelOrderById(orderId: string): Observable<any> {
     console.log('Ingreso a cancelar orden');
     return this.httpClient
-      .put(`http://localhost:9092/orders/cmd/` + orderId, '', this.httpOptions);
+      .put(environment.COMMAND_ORDERS_SERVICE_URL + '/' + orderId, '', this.httpOptions);
   }
 
   getOrderDetails(orderId: string): Observable<any> {
     console.log('Ingreso a traer el detalle de la orden');
     return this.httpClient
-      .get(`http://localhost:9092/orders/qrs/detail/` + orderId, this.httpOptionsWithParams);
+      .get(environment.GET_ORDER_DETAILS_URL + orderId, this.httpOptionsWithParams);
   }
 
 }

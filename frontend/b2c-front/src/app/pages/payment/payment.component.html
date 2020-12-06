@@ -1,0 +1,69 @@
+<div class="header bg-gradient-danger py-1 py-lg-1">
+    <div class="container">
+        <div class="header-body text-center mb-7">
+            <div class="row justify-content-center">
+            </div>
+        </div>
+    </div>
+
+    <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+            xmlns="http://www.w3.org/2000/svg">
+            <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+    </div>
+</div>
+<br>
+<br>
+
+<div class="container-fluid px-1 px-md-2 px-lg-4 py-5 mx-auto">
+    <div class="row d-flex justify-content-center">
+        <div class="col-xl-7 col-lg-8 col-md-9 col-sm-11">
+            <div class="card border-0">
+                <div class="row justify-content-center">
+                    <h3 class="mb-4">Ingresar Medio de Pago</h3>
+                </div>
+                <form role="form" [formGroup]="formCreditCard" (submit)="payRegister()" novalidate>
+                    <div class="row">
+                        <div class="col-sm-8 border-line pb-3">
+                            <div class="form-group">
+                                <p class="text-muted text-sm mb-0">Nombre de la Tarjeta</p>
+                                <input type="text" name="name" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <p class="text-muted text-sm mb-0">Número de la Tarjeta</p>
+                                <div class="row px-3">
+                                    <input id="cc-number" formControlName="creditCard" type="tel" autocomplete="cc-number" placeholder="0000 0000 0000 0000" ccNumber>
+                                    <p class="mb-0 ml-3">/</p> <img class="image ml-1" src="https://i.imgur.com/WIAP9Ku.jpg">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p class="text-muted text-sm mb-0">Fecha de Expiración</p>
+                                <div class="row" cc-exp>
+                                    <div class="col-xs-3 px-3">
+                                        <input placeholder="YY/MM" id="cc-exp-date" formControlName="expirationDate" type="tel" autocomplete="cc-exp" ccExp>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p class="text-muted text-sm mb-0">CVV/CVC</p>
+                                <input id="cc-cvc" formControlName="cvc" type="tel" autocomplete="off" placeholder="000" ccCvc>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 text-sm-center justify-content-center pt-4 pb-4">
+                            <small class="text-sm text-muted">Número de la Orden</small>
+                            <h5 class="mb-5">{{ orderId }}</h5>
+                            <small class="text-sm text-muted">Total de la Orden</small>
+                            <div class="row px-3 justify-content-sm-center">
+                                <h2 class=""><span class="text-md font-weight-bold mr-2">$</span>
+                                    <span class="text-danger">{{ total }}</span>
+                                </h2>
+                            </div>
+                            <button type="submit" class="btn btn-lg btn-warning" [disabled]="formCreditCard.invalid">Registrar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

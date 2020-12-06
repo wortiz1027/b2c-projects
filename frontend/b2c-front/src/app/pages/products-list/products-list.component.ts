@@ -13,7 +13,7 @@ export class ProductsListComponent implements OnInit {
 
   public productosResult = [];
   public totalItems = 1;
-  public totalItemsToShow = 1;
+  public totalItemsToShow = 10;
   public totalPages = 0;
   public currentPage = 0;
   public textSearch = '';
@@ -51,6 +51,9 @@ export class ProductsListComponent implements OnInit {
         },
         (error) => {
           console.log('Error {}', JSON.stringify(error));
+          if (error.status === 401) {
+            this._loginService.userLogout();
+          }
         }
       );
     } else {
@@ -66,6 +69,9 @@ export class ProductsListComponent implements OnInit {
         },
         (error) => {
           console.log('Error {}', JSON.stringify(error));
+          if (error.status === 401) {
+            this._loginService.userLogout();
+          }
         }
       );
     }
@@ -84,6 +90,9 @@ export class ProductsListComponent implements OnInit {
       },
       (error) => {
         console.log('Error: ', JSON.stringify(error));
+        if (error.status === 401) {
+          this._loginService.userLogout();
+        }
       }
     );
   }

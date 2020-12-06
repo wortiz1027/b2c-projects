@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { LoginService } from './login.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class ProductosService {
@@ -34,7 +35,7 @@ export class ProductosService {
         params = params.append('size', productsPerPage.toString());
         this.httpOptionsWithParams.params = params;
         return this.httpClient
-            .get(`http://localhost:9092/products/qrs`, this.httpOptionsWithParams);
+            .get(environment.GET_ALL_PRODUCTS_SERVICE_URL, this.httpOptionsWithParams);
     }
 
     searchProducts(keyWord: string): Producto[] {
@@ -57,7 +58,7 @@ export class ProductosService {
         params = params.append('code', idProduct);
         this.httpOptionsWithParams.params = params;
         return this.httpClient
-            .get(`http://localhost:9092/products/qrs/details`, this.httpOptionsWithParams);
+            .get(environment.GET_PRODUCT_DETAILS_SERVICE_URL, this.httpOptionsWithParams);
     }
 
     getProductosByText(textSearch: string, pageNumber: number, productsPerPage: number): Observable<any> {
@@ -67,9 +68,9 @@ export class ProductosService {
         params = params.append('size', productsPerPage.toString());
         this.httpOptionsWithParams.params = params;
         this.formData.delete('text');
-        this.formData.append('text', '*' + textSearch + '*');
+        this.formData.append('text', textSearch);
         return this.httpClient
-            .post(`http://localhost:9092/products/qrs/text`, this.formData, this.httpOptionsWithParams);
+            .post(environment.GET_PRODUCTS_BY_TEXT_SERVICE_URL, this.formData, this.httpOptionsWithParams);
     }
 
     getProductsByCampaign(campaignId: string, pageNumber: number, productsPerPage: number): Observable<any> {
@@ -79,7 +80,7 @@ export class ProductosService {
         params = params.append('size', productsPerPage.toString());
         this.httpOptionsWithParams.params = params;
         return this.httpClient
-            .get(`http://localhost:9092/campaigns/qrs/` + campaignId + `/products`, this.httpOptionsWithParams);
+            .get(environment.CAMPAINS_SERVICE_URL + '/' + campaignId + `/products`, this.httpOptionsWithParams);
     }
 }
 
@@ -110,141 +111,3 @@ export interface Image {
     id: string;
     url: string;
 }
-
-
-/*
- = [
-        {
-            productId: '121321321',
-            productCode: '1',
-            productName: 'Producto 1',
-            productDescription: 'Esta es la descripción del producto',
-            startDate: new Date(),
-            endDate: new Date(),
-            type: {
-                id: '12312-edasd',
-                description: 'Vuelo',
-                status: 'OK'
-            },
-            productPrice: 1231321,
-            originCity: 'Bogotá',
-            destinationCity: 'Lima',
-            image: {
-                id: 'asdasd',
-                url: '/assets/img/theme/sketch.jpg'
-            },
-            vendorId: 'sdasdasd',
-            status: 'OK'
-        },
-        {
-            productId: '121321321',
-            productCode: '2',
-            productName: 'Producto 2',
-            productDescription: 'Esta es la descripción del producto',
-            startDate: new Date(),
-            endDate: new Date(),
-            type: {
-                id: '12312-edasd',
-                description: 'Vuelo',
-                status: 'OK'
-            },
-            productPrice: 1231321,
-            originCity: 'Bogotá',
-            destinationCity: 'Lima',
-            image: {
-                id: 'asdasd',
-                url: '/assets/img/theme/sketch.jpg'
-            },
-            vendorId: 'sdasdasd',
-            status: 'OK'
-        },
-        {
-            productId: '121321321',
-            productCode: '3',
-            productName: 'Producto 3',
-            productDescription: 'Esta es la descripción del producto',
-            startDate: new Date(),
-            endDate: new Date(),
-            type: {
-                id: '12312-edasd',
-                description: 'Vuelo',
-                status: 'OK'
-            },
-            productPrice: 1231321,
-            originCity: 'Bogotá',
-            destinationCity: 'Lima',
-            image: {
-                id: 'asdasd',
-                url: '/assets/img/theme/sketch.jpg'
-            },
-            vendorId: 'sdasdasd',
-            status: 'OK'
-        },
-        {
-            productId: '121321321',
-            productCode: '4',
-            productName: 'Producto 4',
-            productDescription: 'Esta es la descripción del producto',
-            startDate: new Date(),
-            endDate: new Date(),
-            type: {
-                id: '12312-edasd',
-                description: 'Vuelo',
-                status: 'OK'
-            },
-            productPrice: 1231321,
-            originCity: 'Bogotá',
-            destinationCity: 'Lima',
-            image: {
-                id: 'asdasd',
-                url: '/assets/img/theme/sketch.jpg'
-            },
-            vendorId: 'sdasdasd',
-            status: 'OK'
-        },
-        {
-            productId: '121321321',
-            productCode: '5',
-            productName: 'Producto 2',
-            productDescription: 'Esta es la descripción del producto',
-            startDate: new Date(),
-            endDate: new Date(),
-            type: {
-                id: '12312-edasd',
-                description: 'Vuelo',
-                status: 'OK'
-            },
-            productPrice: 1231321,
-            originCity: 'Bogotá',
-            destinationCity: 'Lima',
-            image: {
-                id: 'asdasd',
-                url: '/assets/img/theme/sketch.jpg'
-            },
-            vendorId: 'sdasdasd',
-            status: 'OK'
-        },
-        {
-            productId: '121321321',
-            productCode: '6',
-            productName: 'Producto 6',
-            productDescription: 'Esta es la descripción del producto',
-            startDate: new Date(),
-            endDate: new Date(),
-            type: {
-                id: '12312-edasd',
-                description: 'Vuelo',
-                status: 'OK'
-            },
-            productPrice: 1231321,
-            originCity: 'Bogotá',
-            destinationCity: 'Lima',
-            image: {
-                id: 'asdasd',
-                url: '/assets/img/theme/sketch.jpg'
-            },
-            vendorId: 'sdasdasd',
-            status: 'OK'
-        }
-    ];
-*/

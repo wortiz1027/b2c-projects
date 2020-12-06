@@ -4,6 +4,7 @@ import { Producto, ProductosService } from '../../services/productos.service';
 import { LoginService } from '../../services/login.service';
 import { OrdersService, OrderCreate, ProductOrder } from 'src/app/services/orders.service';
 import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart-details',
@@ -15,11 +16,13 @@ export class ShoppingCartDetailsComponent implements OnInit {
   public products: ProductCart[];
   public productsToShow: Producto[];
   public order: OrderCreate = {};
+  public total = 0;
 
   constructor(private _shoppingCartService: ShoppingCartService,
     private _productosService: ProductosService,
     private _loginService: LoginService,
-    private _ordersService: OrdersService) { }
+    private _ordersService: OrdersService,
+    private router: Router) { }
 
   ngOnInit(): void {
     console.log('products total: ', this._shoppingCartService.getTotalProducts());
@@ -41,6 +44,9 @@ export class ShoppingCartDetailsComponent implements OnInit {
           },
           (error) => {
             console.error('Error trayendo el detalle: ', error);
+            if (error.status === 401) {
+              this._loginService.userLogout();
+            }
           }
         );
       }
@@ -71,14 +77,20 @@ export class ShoppingCartDetailsComponent implements OnInit {
       productToPush.code = product.productCode;
       productToPush.id = product.productId;
       productToPush.price = product.productPrice;
+      productToPush.quantity = product.quantity;
+      this.total += product.productPrice;
       this.order.products.push(productToPush);
     }
     this._ordersService.createOrder(this.order).subscribe(
       (res) => {
         console.log('Proceso exitoso ', JSON.stringify(res));
+        this.router.navigate(['/payment', this.order.id, this.total]);
       },
       (error) => {
         console.log('Error en la compra ', JSON.stringify(error));
+        if (error.status === 401) {
+          this._loginService.userLogout();
+        }
       }
     );
   }

@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+	b2c-application:
+		image: b2c-application:latest
+		container_name: b2c-application
+		hostname: b2c-application
+		restart: always
+		ports:
+		  - 8300:80
+		environment:
+		  - HOST_API_GATEWAY=http://10.39.1.85:9092
+		networks:
+		  - ntw_backend
+networks:
+  ntw_backend:
+    external: true

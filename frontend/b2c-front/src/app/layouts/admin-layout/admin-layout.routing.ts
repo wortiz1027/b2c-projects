@@ -10,6 +10,7 @@ import { AuthenticationGuard } from '../../guard/authentication.guard';
 import { CampaignDetailComponent } from '../../pages/campaign-detail/campaign-detail.component';
 import { OrdersListComponent } from 'src/app/pages/orders-list/orders-list.component';
 import { OrderDetailsComponent } from 'src/app/pages/order-details/order-details.component';
+import { PaymentComponent } from 'src/app/pages/payment/payment.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -19,5 +20,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'shopping-cart-details',      component: ShoppingCartDetailsComponent },
     { path: 'campaign-detail/:campaignId/:discount',      component: CampaignDetailComponent },
     { path: 'orders',      component: OrdersListComponent },
-    { path: 'order-detail/:orderId',      component: OrderDetailsComponent }
+    { path: 'order-detail/:orderId',      component: OrderDetailsComponent },
+    { path: 'payment/:orderId/:total',      component: PaymentComponent }
 ];

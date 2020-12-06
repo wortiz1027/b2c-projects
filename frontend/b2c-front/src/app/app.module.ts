@@ -18,6 +18,9 @@ import { ProductCardComponent } from './pages/product-card/product-card.componen
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
 import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
+
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { ShoppingCartDetailsComponent } from './pages/shopping-cart-details/shopping-cart-details.component';
 import { ProductCardCartComponent } from './pages/product-card-cart/product-card-cart.component';
@@ -28,6 +31,9 @@ import { ProductCartCampaignComponent } from './pages/product-cart-campaign/prod
 import { OrdersService } from './services/orders.service';
 import { OrdersListComponent } from './pages/orders-list/orders-list.component';
 import { OrderDetailsComponent } from './pages/order-details/order-details.component';
+import { PaymentComponent } from './pages/payment/payment.component';
+import { CreditCardDirectivesModule } from 'angular-cc-library';
+import { PaymentService } from './services/payment.service';
 
 @NgModule({
   imports: [
@@ -41,7 +47,9 @@ import { OrderDetailsComponent } from './pages/order-details/order-details.compo
     ReactiveFormsModule,
     MatCardModule,
     JwPaginationModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatFormFieldModule,
+    CreditCardDirectivesModule
   ],
   declarations: [
     AppComponent,
@@ -55,13 +63,15 @@ import { OrderDetailsComponent } from './pages/order-details/order-details.compo
     CampaignDetailComponent,
     ProductCartCampaignComponent,
     OrdersListComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    PaymentComponent
   ],
   providers: [
     AutguardService,
     LoginService,
     ShoppingCartService,
-    OrdersService
+    OrdersService,
+    PaymentService
   ],
   bootstrap: [AppComponent]
 })

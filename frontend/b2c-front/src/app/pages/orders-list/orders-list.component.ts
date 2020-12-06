@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrdersService, OrderSearch } from 'src/app/services/orders.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
+import { BpmService } from 'src/app/services/bpm.service';
 
 @Component({
   selector: 'app-orders-list',
@@ -18,7 +19,8 @@ export class OrdersListComponent implements OnInit {
 
   constructor(private _ordersService: OrdersService,
     private _loginService: LoginService,
-    private router: Router) {
+    private router: Router,
+    private _bpmService: BpmService) {
   }
 
   ngOnInit(): void {
@@ -34,6 +36,12 @@ export class OrdersListComponent implements OnInit {
         this.totalPages = res.data.totalPages;
         this.currentPage = res.data.currentPage;
         this._loginService.refreshToken();
+      },
+      (error) => {
+        console.error('Error al obtener órdenes: ', error);
+        if (error.status === 401) {
+          this._loginService.userLogout();
+        }
       }
     );
   }
@@ -42,10 +50,24 @@ export class OrdersListComponent implements OnInit {
     this._ordersService.cancelOrderById(order.id).subscribe(
       (res) => {
         console.log('Result: ', res);
-        this.getOrdersByUser();
+        this._bpmService.cancelOrderBPM(order.id).subscribe(
+          (resBPM) => {
+            console.log('Res BPM: ', resBPM);
+            this.getOrdersByUser();
+          },
+          (errorBPM) => {
+            console.error('Error BPM: ', errorBPM);
+            if (errorBPM.status === 401) {
+              this._loginService.userLogout();
+            }
+          }
+        );
       },
       (error) => {
         console.error(error);
+        if (error.status === 401) {
+          this._loginService.userLogout();
+        }
       }
     );
   }

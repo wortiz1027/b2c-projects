@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { LoginService } from './login.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class CampaignsService {
@@ -23,7 +24,7 @@ export class CampaignsService {
     params = params.append('size', '100');
     this.httpOptionsWithParams.params = params;
     return this.httpClient
-      .get(`http://localhost:9092/campaigns/qrs`, this.httpOptionsWithParams);
+      .get(environment.CAMPAINS_SERVICE_URL, this.httpOptionsWithParams);
   }
 
 }
@@ -45,23 +46,3 @@ export interface Image {
   id: string;
   url: string;
 }
-
-
-/*
-{
-        "campaignId": "3c58ab61-f679-4c2e-a21e-b17599b46427",
-        "campaignCode": "CP_0001",
-        "campaignName": "Dia del padre",
-        "campaignDescription": "tiquetes y hospedaje con el 15% de descuento",
-        "image": {
-            "id": "51104744-8104-44ce-a6eb-3c99256d242f",
-            "url": ""
-        },
-        "startDate": "2020-11-11",
-        "endDate": "2020-11-15",
-        "discount": 15,
-        "status": "ACTIVE",
-        "action": ""
-    }
-}
-*/

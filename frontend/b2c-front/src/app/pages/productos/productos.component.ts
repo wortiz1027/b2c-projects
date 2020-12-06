@@ -23,6 +23,9 @@ export class ProductosComponent implements OnInit {
       },
       (error) => {
         console.log('Error {}', JSON.stringify(error));
+        if (error.status === 401) {
+          this._loginService.userLogout();
+        }
       }
     );
   }
