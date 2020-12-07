@@ -18,7 +18,6 @@ export class CampaignsService {
   };
 
   getAllCampaigns(): Observable<any> {
-    console.log('Ingreso a traer los productos');
     let params = new HttpParams();
     params = params.append('page', '0');
     params = params.append('size', '100');

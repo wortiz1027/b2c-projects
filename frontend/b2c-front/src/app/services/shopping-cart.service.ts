@@ -13,18 +13,14 @@ export class ShoppingCartService {
   constructor() { }
 
   addItemToCart(product: Producto) {
-    console.log('Ingresó a agregar producto');
     let itemExists = false;
     if (localStorage.getItem('shoppingCart') === '' || localStorage.getItem('shoppingCart') === null) {
       this.shoppingCart = [];
     } else {
-      console.log('carrito de compras: ', JSON.parse(localStorage.getItem('shoppingCart')));
       this.shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
     }
-    console.log('var: ', itemExists);
     for (let i = 0; i < this.shoppingCart.length; i++) {
       if (this.shoppingCart[i].productCode === product.productCode) {
-        console.log(this.shoppingCart[i].productCode + '   ' + product.productCode);
         itemExists = true;
         this.shoppingCart[i].productQuantity += 1;
         this.shoppingCart[i].productPrice = product.productPrice;

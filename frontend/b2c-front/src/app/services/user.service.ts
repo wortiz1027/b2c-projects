@@ -15,7 +15,6 @@ export class UserService {
 
     constructor(private httpClient: HttpClient,
         private _loginService: LoginService) {
-        console.log('Users service ready!!');
     }
 
     httpOptionsWithParams = {
@@ -26,7 +25,6 @@ export class UserService {
     };
 
     createUser(_body: User): Observable<any> {
-        console.log('Consume UserService: ', _body);
         _body.codigo = _body.cedula;
         _body.accountNonExpired = 'true';
         _body.credentialNonExpired = 'true';
@@ -59,14 +57,12 @@ export class UserService {
             code: 'DRD',
             description: 'Dorado'
         };
-        console.log('Consume UserService2: ', _body);
 
         return this.httpClient
             .post<any>(environment.CREATE_USER_SERVICE, JSON.stringify(_body), this.httpOptions);
     }
 
     getUserDetailByUsername(username: string): Observable<any> {
-        console.log('Ingreso a traer los productos');
         let params = new HttpParams();
         params = params.append('username', username);
         this.httpOptionsWithParams.params = params;

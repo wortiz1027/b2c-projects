@@ -11,7 +11,6 @@ export class BpmService {
 
   constructor(private httpClient: HttpClient,
     private _loginService: LoginService) {
-    console.log('Cancel Order BPM service ready!!');
   }
 
   httpOptions = {

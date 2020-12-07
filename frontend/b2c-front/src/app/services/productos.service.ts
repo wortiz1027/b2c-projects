@@ -12,7 +12,6 @@ export class ProductosService {
 
     constructor(private httpClient: HttpClient,
         private _loginService: LoginService) {
-        console.log('Servicio listo para usar');
     }
 
     httpOptions = {
@@ -29,7 +28,6 @@ export class ProductosService {
     };
 
     getAllProducts(pageNumber: number, productsPerPage: number): Observable<any> {
-        console.log('Ingreso a traer los productos');
         let params = new HttpParams();
         params = params.append('page', pageNumber.toString());
         params = params.append('size', productsPerPage.toString());
@@ -48,12 +46,10 @@ export class ProductosService {
                 productsArr.push(productSearched);
             }
         }
-        console.log(productsArr);
         return productsArr;
     }
 
     getProduct(idProduct: string): Observable<any> {
-        console.log('Ingreso a traer el detalle del producto');
         let params = new HttpParams();
         params = params.append('code', idProduct);
         this.httpOptionsWithParams.params = params;
@@ -62,7 +58,6 @@ export class ProductosService {
     }
 
     getProductosByText(textSearch: string, pageNumber: number, productsPerPage: number): Observable<any> {
-        console.log('Ingreso a traer productos por Texto: ', textSearch);
         let params = new HttpParams();
         params = params.append('page', pageNumber.toString());
         params = params.append('size', productsPerPage.toString());
@@ -74,7 +69,6 @@ export class ProductosService {
     }
 
     getProductsByCampaign(campaignId: string, pageNumber: number, productsPerPage: number): Observable<any> {
-        console.log('Ingreso a traer el productos por campaña');
         let params = new HttpParams();
         params = params.append('page', pageNumber.toString());
         params = params.append('size', productsPerPage.toString());

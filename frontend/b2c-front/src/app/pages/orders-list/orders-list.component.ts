@@ -49,10 +49,8 @@ export class OrdersListComponent implements OnInit {
   cancelOrderById(order: OrderSearch) {
     this._ordersService.cancelOrderById(order.id).subscribe(
       (res) => {
-        console.log('Result: ', res);
         this._bpmService.cancelOrderBPM(order.id).subscribe(
           (resBPM) => {
-            console.log('Res BPM: ', resBPM);
             this.getOrdersByUser();
           },
           (errorBPM) => {

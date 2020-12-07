@@ -57,7 +57,6 @@ export class RegisterComponent implements OnInit {
 
     this._userService.createUser(this.userToCreate).subscribe(
       (res) => {
-        console.log('Ingresó ', res);
         this.response = res;
         this.loginUser();
       },
@@ -68,7 +67,6 @@ export class RegisterComponent implements OnInit {
         }
       }
     );
-    // console.log(this.registerUsersForm.value);
   }
 
   loginUser() {

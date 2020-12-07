@@ -30,15 +30,12 @@ export class CampaignDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('Campaña attr: ' + this.campaignId + '  ' + this.discount);
     this.getProductsByCampaign();
   }
 
   getProductsByCampaign() {
-    console.log('Ingresó a consultar campañas');
     this._productosService.getProductsByCampaign(this.campaignId, this.currentPage, this.totalItemsToShow).subscribe(
       (res) => {
-        console.log('Respuesta Products By Campaign: ', JSON.stringify(res));
         this.productosResult = res.campaign.data.products;
         this.totalItems = res.campaign.data.totalItems;
         this.totalPages = res.campaign.data.totalPages;

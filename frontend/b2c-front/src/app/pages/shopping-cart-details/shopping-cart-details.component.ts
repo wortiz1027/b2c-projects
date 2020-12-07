@@ -25,7 +25,6 @@ export class ShoppingCartDetailsComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    console.log('products total: ', this._shoppingCartService.getTotalProducts());
     this.productsToShow = [];
     this.products = this._shoppingCartService.getAllProducts();
     if (this.products.length === 0) {
@@ -83,7 +82,6 @@ export class ShoppingCartDetailsComponent implements OnInit {
     }
     this._ordersService.createOrder(this.order).subscribe(
       (res) => {
-        console.log('Proceso exitoso ', JSON.stringify(res));
         this.router.navigate(['/payment', this.order.id, this.total]);
       },
       (error) => {

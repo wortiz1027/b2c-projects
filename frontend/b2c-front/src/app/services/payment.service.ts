@@ -19,7 +19,6 @@ export class PaymentService {
   };
 
   validateCreditCard(creditCard: CreditCardRq) {
-    console.log('Ingresó a validar tarjeta');
     const request: RequestCC = {};
     request.creditCard = creditCard;
     return this.httpClient

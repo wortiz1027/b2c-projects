@@ -22,12 +22,10 @@ export class LoginService {
         private cookies: CookieService,
         private router: Router,
         private _shoppingCartService: ShoppingCartService) {
-        console.log('Users service ready!!');
     }
 
     userLogin(_body: UserToLoging): Observable<any> {
         this._shoppingCartService.clearCart();
-        console.log('Ingreso al login');
         this.formData.append('client_id', '89792737-705f-4358-a95b-744962644de4');
         this.formData.append('client_secret', '0b78c28e-6abc-4252-85d1-214da95bc6ca');
         this.formData.append('scope', 'read write');
@@ -77,7 +75,6 @@ export class LoginService {
     }
 
     refreshToken() {
-        console.log('Ingreso a refrescar token');
         this.formData.append('client_id', '89792737-705f-4358-a95b-744962644de4');
         this.formData.append('client_secret', '0b78c28e-6abc-4252-85d1-214da95bc6ca');
         this.formData.append('grant_type', 'refresh_token');

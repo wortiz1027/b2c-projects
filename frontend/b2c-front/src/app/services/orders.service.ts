@@ -26,7 +26,6 @@ export class OrdersService {
   };
 
   createOrder(order: OrderCreate): Observable<any> {
-    console.log('Ingreso a crear orden');
     const codeUuid = UUID.UUID();
     const payment: Payment = {
       id: codeUuid
@@ -34,13 +33,11 @@ export class OrdersService {
     order.id = codeUuid;
     order.code = codeUuid;
     order.payment = payment;
-    console.log('Rq Orders: ', JSON.stringify(order));
     return this.httpClient
       .post<any>(environment.COMMAND_ORDERS_SERVICE_URL, JSON.stringify(order), this.httpOptions);
   }
 
   getOrdersByUserName(username: string, pageNumber: number, ordersPerPage: number): Observable<any> {
-    console.log('Ingreso a traer los productos');
     let params = new HttpParams();
     params = params.append('page', pageNumber.toString());
     params = params.append('size', ordersPerPage.toString());
@@ -50,13 +47,11 @@ export class OrdersService {
   }
 
   cancelOrderById(orderId: string): Observable<any> {
-    console.log('Ingreso a cancelar orden');
     return this.httpClient
       .put(environment.COMMAND_ORDERS_SERVICE_URL + '/' + orderId, '', this.httpOptions);
   }
 
   getOrderDetails(orderId: string): Observable<any> {
-    console.log('Ingreso a traer el detalle de la orden');
     return this.httpClient
       .get(environment.GET_ORDER_DETAILS_URL + orderId, this.httpOptionsWithParams);
   }

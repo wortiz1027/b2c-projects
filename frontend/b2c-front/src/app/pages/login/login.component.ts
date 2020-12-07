@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnDestroy() { }
 
   loginUser() {
-    console.log('Ingresó a login');
     if (this.loginUsersForm.invalid) {
       alert('Alguna regla de validación no se está cumpliendo');
       return;
@@ -39,8 +38,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.userToLogin.username = this.loginUsersForm.get('username').value;
     this.userToLogin.password = this.loginUsersForm.get('password').value;
-
-    console.log('request: ', JSON.stringify(this.userToLogin));
 
     this._loginService.userLogin(this.userToLogin).subscribe(
       (res) => {

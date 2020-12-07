@@ -35,7 +35,6 @@ export class ProductsListComponent implements OnInit {
   }
 
   getProductsWithPage(textSearch: string, isInitialSearch: boolean) {
-    console.log('Texto de búsqueda: ', textSearch);
     if (isInitialSearch) {
       this.currentPage = 0;
     }
@@ -60,7 +59,6 @@ export class ProductsListComponent implements OnInit {
       this.textSearch = textSearch;
       this._productosService.getProductosByText(this.textSearch, this.currentPage, this.totalItemsToShow).subscribe(
         (res) => {
-          console.log('result text: ', res);
           this.productosResult = res.data.products;
           this.totalItems = res.data.totalItems;
           this.totalPages = res.data.totalPages;
@@ -84,7 +82,6 @@ export class ProductsListComponent implements OnInit {
   getCampaigns() {
     this._campaignsService.getAllCampaigns().subscribe(
       (res) => {
-        console.log('Campaigns: ', JSON.stringify(res));
         this.campaigns = res.data.campaigns;
         this._loginService.refreshToken();
       },
@@ -98,7 +95,6 @@ export class ProductsListComponent implements OnInit {
   }
 
   getCampaignDetail(campaign: Campaign) {
-    console.log('Campaign Detail: ', JSON.stringify(campaign));
     this.router.navigate(['/campaign-detail', campaign.campaignId, campaign.discount]);
   }
 

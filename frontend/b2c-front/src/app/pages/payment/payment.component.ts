@@ -52,17 +52,15 @@ export class PaymentComponent implements OnInit {
       alert('Alguna regla de validación no se está cumpliendo');
       return;
     }
-    console.log(this.formCreditCard);
     this.creditCard.type = 'VISA';
     this.creditCard.mount = 12343;
     this.creditCard.number = this.formCreditCard.get('creditCard').value;
     this._paymentService.validateCreditCard(this.creditCard).subscribe(
       (res) => {
-        console.log('Registro exitoso: ', res);
         this._shoppingCartService.clearCart();
         this._bpmService.instanceOrderBPM(this.orderId).subscribe(
           (resBPM) => {
-            console.log(resBPM);
+            console.log('resBPM');
           },
           (errorBPM) => {
             console.error(errorBPM);
