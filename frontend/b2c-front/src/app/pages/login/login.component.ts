@@ -45,15 +45,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.responseService.username = this.userToLogin.username;
         this._loginService.setToken(this.responseService);
         this._loginService.setUserInformation(this.userToLogin.username);
-        this._userService.getUserDetailByUsername(this.userToLogin.username).subscribe(
-          (res2) => {
-            this._loginService.setUserDetails(res2.user.cedula);
-          },
-          (error) => {
-            console.error(error);
-          }
-        );
-        this.router.navigate(['/products-list']);
+        setTimeout(() => {
+          this.router.navigate(['/products-list']);
+        }, 1000);
       },
       (error) => {
         console.log('Error {}', error);
