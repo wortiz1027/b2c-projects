@@ -90,7 +90,7 @@ export interface Producto {
     originCity?: string;
     destinationCity?: string;
     image?: Image;
-    vendorId?: string;
+    vendor?: Vendor;
     status?: string;
     quantity?: number;
 }
@@ -104,4 +104,23 @@ export interface ProductType {
 export interface Image {
     id: string;
     url: string;
+}
+
+export interface Vendor {
+    idProvider?: string;
+    nameProvider?: string;
+    nit?: string;
+    address?: string;
+    telephone?: string;
+    email?: string;
+    idCountry?: string;
+    idProvince?: string;
+    idCity?: string;
+    types?: IdDescripcionI;
+}
+
+export interface IdDescripcionI{
+    id?: string;
+    idType?: string;
+    description?: string;
 }
